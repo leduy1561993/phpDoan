@@ -1,16 +1,16 @@
 <?php
 // array for JSON response
 $response = array();
-if (isset($_POST['UserId']) &&isset($_POST['JobId']) && isset($_POST['Rating'])) {
+if (isset($_POST['UserId']) &&isset($_POST['JobId']) && isset($_POST['Rate'])) {
     $UserId = $_POST['UserId'];
     $JobId = $_POST['JobId'];
-    $Rating = $_POST['Rating'];
+    $Rate = $_POST['Rate'];
 // include db connect class
 require_once __DIR__ . '/connect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
-$result = mysql_query("Update rate_save_seen set Rating ='$Rating' WHERE UserId='$UserId' and JobId ='$JobId' ") or die(mysql_error());
+$result = mysql_query("Update rate_save_seen set Rate ='$Rate' WHERE UserId='$UserId' and JobId ='$JobId' ") or die(mysql_error());
 
  if ($result) {
         // successfully updated
