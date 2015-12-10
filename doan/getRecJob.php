@@ -28,11 +28,11 @@ if (isset($_POST["UserId"])) {
 	"
 	SELECT job.JobId,JobName,Location,Company,Logo,ratepoint,savepoint,seenpoint 
 	from 
-	(SELECT JobId,Rating from result_recommended where UserId='$UserId') R1
+	(SELECT JobId,Rate from result_recommended where UserId='$UserId') R1
 	INNER JOIN
 	job
 	ON R1.JobId = job.JobId
-	ORDER BY R1.Rating ASC
+	ORDER BY R1.Rate ASC
 	limit $limit offset $offset
 	"
 	)or die(mysql_error());

@@ -28,11 +28,11 @@ if (isset($_POST["UserId"])) {
 	"
 	SELECT job.JobId,JobName,Location,Company,Logo,ratepoint,savepoint,seenpoint 
 	from 
-	(SELECT JobId,Seen,Rating from rate_save_seen where UserId='$UserId' and isSave = 1) rateId
+	(SELECT JobId,Seen,Rate from rate_save_seen where UserId='$UserId' and isSave = 1) rateId
 	INNER JOIN
 	job
 	ON rateId.JobId = job.JobId
-	ORDER BY rateId.Seen DESC, rateId.Rating DESC
+	ORDER BY rateId.Seen DESC, rateId.Rate DESC
 	limit $limit offset $offset
 	"
 	)or die(mysql_error());
