@@ -18,11 +18,11 @@ if(mysql_num_rows($check_rate) > 0){
 	$check_rate=mysql_query("INSERT INTO rate_save_seen(UserId, JobId, Seen) VALUES('$UserId', '$JobId', 1)");
 }
 
-$result = mysql_query("SELECT job.JobId,JobName,Location,Salary,Description,Requirement,Benifit,Expired,Source,Company,Logo,rate.Rating ,rate.IsSave
+$result = mysql_query("SELECT job.JobId,JobName,Location,Salary,Description,Requirement,Benifit,Expired,Source,Company,Logo,rate.Rate ,rate.IsSave
 FROM
 (SELECT JobId,JobName,Location,Salary,Description,Requirement,Benifit,Expired,Source,Company,Logo FROM job WHERE JobId='$JobId') job
 LEFT JOIN 
-(SELECT Rating,JobId,IsSave from rate_save_seen WHERE JobId='$JobId' and UserId ='$UserId') rate
+(SELECT Rate,JobId,IsSave from rate_save_seen WHERE JobId='$JobId' and UserId ='$UserId') rate
 ON job.JobId = rate.JobId ") or die(mysql_error());
 
 if (mysql_num_rows($result) > 0) { 
@@ -38,7 +38,7 @@ if (mysql_num_rows($result) > 0) {
 	$response["Source"] = $row["Source"];
 	$response["Company"] = $row["Company"];
 	$response["Logo"] = $row["Logo"];
-	$response["Rating"] = $row["Rating"];
+	$response["Rate"] = $row["Rate"];
 	$response["IsSave"] = $row["IsSave"];
     // success
     $response["success"] = 1;
