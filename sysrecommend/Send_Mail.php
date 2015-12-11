@@ -2,10 +2,7 @@
 function Send_Mail($to,$subject,$body)
 {
 $from       = 'leduy1561993@gmail.com';
-require 'PHPMailerAutoload.php';
-
 $mail = new PHPMailer;
-
 $mail = new PHPMailer(true);
 $mail->CharSet = "UTF-8";
 $mail->IsSMTP(); // set mailer to use SMTP
