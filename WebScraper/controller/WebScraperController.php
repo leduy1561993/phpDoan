@@ -107,7 +107,14 @@ class WebScraperController {
 				if ($dexpired == '')
 					$dexpired = date ( "m" ) + 1 . "-" . date ( "d" ) . "-" . date ( "Y" );
 				
-				$dlogo = $temp .lay_du_lieu ( $xp, Session::get_logo_xpath ()[$type]);
+				if(strpos($_SESSION ['link'] [$_GET ['page']] ['url'],'itviec.com')){
+					$dlogo = 'https://itviec.com'.lay_du_lieu ( $xp, Session::get_logo_xpath ()[$type]);
+				}else if(strpos($_SESSION ['link'] [$_GET ['page']] ['url'],'careerlink.vn')){
+					$dlogo = 'https://www.careerlink.vn'.lay_du_lieu ( $xp, Session::get_logo_xpath ()[$type]);
+				}else{
+					$dlogo = lay_du_lieu ( $xp, Session::get_logo_xpath ()[$type]);
+				}
+				//$dlogo = $temp .lay_du_lieu ( $xp, Session::get_logo_xpath ()[$type]);
 				
 				$dd = get_nodes_list ( $xp, Session::get_tags_xpath ()[$type] )->item ( 0 );
 				if ($djob != '') {
