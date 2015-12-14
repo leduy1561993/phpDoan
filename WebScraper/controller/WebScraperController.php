@@ -111,6 +111,7 @@ class WebScraperController {
 					$dlogo = 'https://itviec.com'.lay_du_lieu ( $xp, Session::get_logo_xpath ()[$type]);
 				}else if(strpos($_SESSION ['link'] [$_GET ['page']] ['url'],'careerlink.vn')){
 					$dlogo = 'https://www.careerlink.vn'.lay_du_lieu ( $xp, Session::get_logo_xpath ()[$type]);
+					$dsalary = trim(str_replace("Lương:","",lay_du_lieu ( $xp, Session::get_salary_xpath ()[$type]) ));
 				}else{
 					$dlogo = lay_du_lieu ( $xp, Session::get_logo_xpath ()[$type]);
 				}
