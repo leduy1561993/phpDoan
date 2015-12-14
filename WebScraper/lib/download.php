@@ -16,11 +16,11 @@ function login($url, $data, $cookie) {
 
 	$login = curl_init ();
 	if (trim($cookie) == "") return;
-	$fp = fopen ($_SERVER ["DOCUMENT_ROOT"]."/cookie/".$cookie, "w");
+	$fp = fopen ($_SERVER ["DOCUMENT_ROOT"]."/WebScraper/cookie/".$cookie, "w");
 	fclose ($fp);
-	chmod ( $_SERVER ["DOCUMENT_ROOT"]."/cookie/".$cookie, 0777 );
-	curl_setopt ( $login, CURLOPT_COOKIEJAR, $_SERVER ["DOCUMENT_ROOT"]."/cookie/".$cookie );
-	curl_setopt ( $login, CURLOPT_COOKIEFILE, $_SERVER ["DOCUMENT_ROOT"]."/cookie/".$cookie );	
+	chmod ( $_SERVER ["DOCUMENT_ROOT"]."/WebScraper/cookie/".$cookie, 0777 );
+	curl_setopt ( $login, CURLOPT_COOKIEJAR, $_SERVER ["DOCUMENT_ROOT"]."/WebScraper/cookie/".$cookie );
+	curl_setopt ( $login, CURLOPT_COOKIEFILE, $_SERVER ["DOCUMENT_ROOT"]."/WebScraper/cookie/".$cookie );	
 	curl_setopt ( $login, CURLOPT_TIMEOUT, 1000 );
 	curl_setopt ( $login, CURLOPT_RETURNTRANSFER, TRUE );
 	curl_setopt ( $login, CURLOPT_URL, $url );
@@ -37,7 +37,7 @@ function login($url, $data, $cookie) {
 
 
 //get content webpage as html
-function curl_download_old($Url,$cookie='')
+function curl_download_old($Url,$cookie)
 {
 	//init curl object
 	$ch = curl_init($Url);	
@@ -49,8 +49,9 @@ function curl_download_old($Url,$cookie='')
 	//set time out value
 	curl_setopt($ch, CURLOPT_TIMEOUT, 3000);
 	//set cookie
-	if ($cookie != "")
-		curl_setopt ( $ch, CURLOPT_COOKIEFILE,  $_SERVER ["DOCUMENT_ROOT"]."/cookie/$cookie");
+	if ($cookie != ""){
+		curl_setopt ( $ch, CURLOPT_COOKIEFILE,  $_SERVER ["DOCUMENT_ROOT"]."/WebScraper/cookie/$cookie");
+	}
 	//download html web page
 	$result = curl_exec($ch);
 	//close curl

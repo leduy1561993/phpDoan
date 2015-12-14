@@ -216,7 +216,7 @@ class XPathModel extends Model {
 	}
 	public function getAll() {
 		$this->connection->connect ();
-		$data = $this->connection->read ( "SELECT * from xpath" );
+		$data = $this->connection->read ( "SELECT * from xpath ORDER BY id" );
 		$this->connection->close ();
 		return $data;
 	}
