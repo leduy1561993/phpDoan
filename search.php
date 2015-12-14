@@ -73,7 +73,7 @@ if (isset($_POST["keyWord"])||isset($_POST["location"])||isset($_POST["special"]
 		
 	}else if(isset($_POST["special"])){
 		$special = $_POST['special'];
-		 $result = $s->Query("@Description $special");
+		 $result = $s->Query("@Requirement $special");
 	}
 	
 	if ($result['total'] > $offset) {
