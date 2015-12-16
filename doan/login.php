@@ -9,7 +9,7 @@ $response = array();
 if (isset($_POST['Email'])&&isset($_POST['Password'])){
 $Email = $_POST['Email'];
 $Password = md5($_POST['Password']);
-$result=mysql_query(" SELECT UserId,Email,Password,image_user FROM user WHERE Email='$Email' AND Password = '$Password'");
+$result=mysql_query(" SELECT UserId,Email,Password,image_user FROM user WHERE Email='$Email' AND Password = '$Password' AND status=1");
 if (mysql_num_rows($result) > 0) { 
     $row = mysql_fetch_array($result);
 	$response["UserId"] = $row["UserId"];
