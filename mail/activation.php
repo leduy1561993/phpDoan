@@ -23,17 +23,17 @@ if(!empty($_GET['code']) && isset($_GET['code']))
 	$UserId = $row['UserId'];
 	mysql_query("INSERT INTO user_setting(UserId) VALUES('$UserId')");
 	
-    $msg="Your account is activated";	
+    $msg="Chúc mừng, Tại khoản đã khích hoạt thành công";	
     }
     else
     {
-	$msg ="Your account is already active, no need to activate again";
+	$msg ="Tài khoản của bạn đã được kích hoạt rồi không cần khích hoạt lại";
     }
 
     }
     else
     {
-	$msg ="Wrong activation code.";
+	$msg ="Sai mã kích hoạt.";
     }
 
 }
