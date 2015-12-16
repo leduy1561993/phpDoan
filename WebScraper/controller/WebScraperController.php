@@ -89,7 +89,7 @@ class WebScraperController {
 				$dcompany = trim ( lay_du_lieu ( $xp, Session::get_company_xpath ()[$type] ) );
 				$dlocation = trim ( lay_du_lieu ( $xp, Session::get_location_xpath ()[$type]) );
 				$ddes = trim ( lay_du_lieu ( $xp, Session::get_description_xpath ()[$type]) );
-				$dsalary = str_replace("$","",trim ( lay_du_lieu ( $xp, Session::get_salary_xpath ()[$type]) ));
+				$dsalary = trim ( lay_du_lieu ( $xp, Session::get_salary_xpath ()[$type]) );
 				$checkstr= '/^[a-zA-Z]/';
 				//$dsalary = str_replace("-","",$dsalary);
 				//$dsalary = str_replace(",","",$dsalary);
