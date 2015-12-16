@@ -7,6 +7,7 @@ require 'PHPMailerAutoload.php';
 $mail = new PHPMailer;
 
 $mail = new PHPMailer(true);
+$mail->CharSet = "UTF-8";
 $mail->IsSMTP(); // set mailer to use SMTP
 $mail->Host = "smtp.gmail.com"; // specify main and backup server
 $mail->Port = 465; // set the port to use

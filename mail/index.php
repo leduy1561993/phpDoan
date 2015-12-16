@@ -6,11 +6,11 @@ require_once __DIR__ . '/connect.php';
 $db = new DB_CONNECT();
 
 $msg='';
-if(!empty($_GET['email']) && isset($_GET['email']) &&  !empty($_GET['password']) &&  isset($_GET['password']) )
+if(!empty($_POST['email']) && isset($_POST['email']) &&  !empty($_POST['password']) &&  isset($_POST['password']) )
 {
 // username and password sent from Form
-$email=mysql_real_escape_string($_GET['email']); 
-$password=mysql_real_escape_string($_GET['password']); 
+$email=mysql_real_escape_string($_POST['email']); 
+$password=mysql_real_escape_string($_POST['password']); 
 
 $regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/';
 
