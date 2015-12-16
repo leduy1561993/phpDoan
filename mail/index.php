@@ -26,7 +26,7 @@ mysql_query("INSERT INTO user(email,password,activation) VALUES('$email','$passw
 
 include 'Send_Mail.php';
 $to=$email;
-$subject="Email verification";
+$subject="Xác nhận địa chỉ email";
 $body='Hi, <br/> <br/> Chúng tôi cần bạn đảm bảo email này là của bạn. Vui lòng xác nhận email theo link . <br/> <br/> <a href="'.$base_url.'activation.php?code='.$activation.'</a>';
 	If(Send_Mail($to,$subject,$body)){
 		$msg= '2';	
