@@ -4,9 +4,8 @@
  * Following code will get single user details
  * A user is identified by user id (u_pk)
  */
-
 // array for JSON response
-error_reporting(E_ALL & ~E_NOTICE);
+//error_reporting(E_ALL & ~E_NOTICE);
 $response = array();
 
 
@@ -24,45 +23,66 @@ if (isset($_POST["UserId"])) {
 	if (isset($_POST['offset'])) {
 		$offset = $_POST['offset'];
 	}
-	$result = mysql_query(
-	"
-	SELECT job.JobId,JobName,Location,Company,Logo,ratepoint,savepoint,seenpoint 
-	from 
-	(SELECT JobId,Rate from result_recommended where UserId='$UserId') R1
-	INNER JOIN
-	job
-	ON R1.JobId = job.JobId
-	ORDER BY R1.Rate ASC
-	limit $limit offset $offset
-	"
-	)or die(mysql_error());
-	if (mysql_num_rows($result) > 0) {
-		// looping through all results
-		// users node
+	$result_setting =mysql_query(
+	"SELECT Location, SkillName 
+	FROM user_setting 
+	LEFT JOIN 
+	skill ON skill.SkillId = user_setting.SkillId 
+	where UserId='$UserId'");
+	$location='';
+	$special='';
+	if (mysql_num_rows($result_setting) > 0) {
+		$row = mysql_fetch_array($result_setting);
+		$location= $row["Location"];
+		$special= $row["SkillName"];
+	}
+	//echo '-----@'.$location.'------@'.$special;
+	$max_matches = 100;	
+	require_once('C:\Sphinx\api\sphinxapi.php');
+	$s = new SphinxClient;
+	$s->setServer("127.0.0.1", 9312);
+	$s->setMatchMode(SPH_MATCH_EXTENDED2);
+	$s->SetLimits((int)$offset,
+		// limit for this "page", starting at $offset
+		(int)$limit,
+		// absolute limit for number of results
+		((int)$limit > $max_matches)
+			? (int)$limit
+			: (int)$max_matches);
+	
+	if(strlen($location)>2&&strlen($special)>0){
+		$result = $s->Query("@ListUserId $UserId @location $location  @(Requirement,Tags) $special");
+	}else if(strlen($location)>2){
+		$result = $s->Query("@ListUserId $UserId @location $location");
+	}else if(strlen($special)>0){
+		$result = $s->Query("@ListUserId $UserId @(Requirement,Tags) $special");
+	}else{
+		$result = $s->Query("@ListUserId $UserId");
+	}
+	
+	if ($result['total'] > $offset) {
 		$response["jobrec"] = array();
-		while ($row = mysql_fetch_array($result)) {
-			$jobsearch = array();
-			$jobsearch["JobId"] = $row["JobId"];
-			$jobsearch["JobName"] = $row["JobName"];
-			$jobsearch["Location"] = $row["Location"];
-			$jobsearch["Company"] = $row["Company"];
-			$jobsearch["Logo"] = $row["Logo"];
-			$ratepoint = $row["ratepoint"];
-			$savepoint = $row["savepoint"];
-			$seenpoint = $row["seenpoint"];
-			$information = 'Rate: '.$ratepoint.' | '.'Save: '.$savepoint.' | '.'See: '.$seenpoint;
-			$jobsearch["Information"] = $information;
-			array_push($response["jobrec"], $jobsearch);
+		foreach ($result['matches'] as $id => $otherStuff) {
+		mysql_query("set names 'utf8'"); 
+			$row = mysql_fetch_array(mysql_query("select JobId,JobName,Location,Company,Logo,ratepoint,savepoint,seenpoint from job where JobId = $id"));
+				// check for empty result
+				$jobrec = array();
+				$jobrec["JobId"] = $row["JobId"];
+				$jobrec["JobName"] = $row["JobName"];
+				$jobrec["Location"] = $row["Location"];
+				$jobrec["Company"] = $row["Company"];
+				$jobrec["Logo"] = $row["Logo"];
+				$ratepoint = $row["ratepoint"];
+				$savepoint = $row["savepoint"];
+				$seenpoint = $row["seenpoint"];
+				$information = 'Rate: '.$ratepoint.' | '.'Save: '.$savepoint.' | '.'See: '.$seenpoint;
+				$jobrec["Information"] = $information;
+				array_push($response["jobrec"], $jobrec);
 		}
-		// success
-		$response["success"] = 1;
-		// echoing JSON response
+		$response["success"] = "1";
 		echo json_encode($response);
-	} else {
-		// no users found
-		$response["success"] = 0;
-		$response["message"] = "No users save found";
-		// echo no users JSON
+	}else {
+		$response["success"]="0";
 		echo json_encode($response);
 	}
 }else{

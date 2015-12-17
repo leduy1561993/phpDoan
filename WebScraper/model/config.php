@@ -1,8 +1,0 @@
-<?php
-
-$get_all_page = true;
-$max_page = 2;
-$min_page = 1;
-$test_max_page=1;
-
-?>

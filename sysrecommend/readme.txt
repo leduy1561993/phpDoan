@@ -1,1 +1,0 @@
-set task Scheduler run in window link to dailysendmail.exe
