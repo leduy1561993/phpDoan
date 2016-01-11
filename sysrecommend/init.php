@@ -109,16 +109,16 @@ if(mysql_num_rows($list_user_send) > 0){
 					$location=$row["Location"];
 					$salary=$row["Salary"];
 					$body =$body."<div align='left' style='background: #fff; padding: 0px; margin-top: 15 ;margin-left: 20; line-height: 5'>
-						<p style ='font-size: 16px; color: #424242; margin-top:5; line-height: 0.5'><a href='";
+						<p style ='font-size: 16px; color: #424242; margin-top:5; line-height: 1'><a href='";
 					$body =$body.$source; // src o day
 					$body =$body."'>";
 					$body =$body.$jobname; // ten cong viec
-					$body =$body."</a></p> <p style ='font-size: 14px; color: #424242; line-height: 0.5'>";
+					$body =$body."</a></p> <p style ='font-size: 14px; color: #424242; line-height: 1'>";
 					$body =$body.$company; // ten cong ty o day
-					$body =$body."</p> <p style ='font-size: 14px; color: #424242; line-height: 0.5'>";
+					$body =$body."</p> <p style ='font-size: 14px; color: #424242; line-height: 1'>";
 					$body =$body."Địa chỉ :"; 
 					$body =$body.$location; // dia chi cong viec
-					$body =$body."</p> <p style ='font-size: 14px; color: #424242; line-height: 0.5'>Mức lương :";
+					$body =$body."</p> <p style ='font-size: 14px; color: #424242; line-height: 1'>Mức lương :";
 					$body =$body.$salary; // Luong o day
 					$body =$body."</p> <HR/> </div>";
 				}
@@ -150,6 +150,6 @@ if(mysql_num_rows($list_user_send) > 0){
 		}
 	}
 }else{
-	echo "Khong co ai gioi thieu";
+	echo "Khong co ai de gui mail";
 }
 ?>
