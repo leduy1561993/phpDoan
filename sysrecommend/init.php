@@ -39,7 +39,7 @@ if(mysql_num_rows($list_user_send) > 0){
 					<p style='margin: 0 ; font-family: Arial, sans-serif; font-size: 26px; color: #fff; font-weight: bold; padding: 2%px;'>
 									Công việc giới thiệu cho bạn</p>
 					<p style='margin: 0; font-family: Arial, sans-serif; font-size: 16px; color: #fff; font-weight: bold; padding: 2%px'>
-								cung cấp bởi Recommendation System</p>
+								cung cấp bởi JRIT</p>
 				</div>
 			</div>
 			<div style=' background: #fff; padding: 30'>
@@ -130,7 +130,7 @@ if(mysql_num_rows($list_user_send) > 0){
 							<p style='margin: 0 ; font-family: Arial, sans-serif; font-size: 14px; color: #fff; padding-bottom: 10px;'>
 											Cảm ơn bạn đã sử dụng sản phẩm của chúng tôi</p>
 							<p style='margin: 0; font-family: Arial, sans-serif; font-size: 14px; color: #fff'>
-										cung cấp bởi Recommendation System</p>
+										cung cấp bởi JRIT</p>
 						</div>
 					</div>
 					</div>
