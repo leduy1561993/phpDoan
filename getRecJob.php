@@ -10,7 +10,7 @@ $response = array();
 
 
 // include db connect class
-require_once __DIR__ . '\connect.php';
+require_once __DIR__ . '/connect.php';
 
 // connecting to db
 $db = new DB_CONNECT();
@@ -59,11 +59,10 @@ if (isset($_POST["UserId"])) {
 	}else{
 		$result = $s->Query("@ListUserId $UserId");
 	}
-	
 	if ($result['total'] > $offset) {
 		$response["jobrec"] = array();
 		foreach ($result['matches'] as $id => $otherStuff) {
-		mysql_query("set names 'utf8'"); 
+			mysql_query("set names 'utf8'"); 
 			$row = mysql_fetch_array(mysql_query("select JobId,JobName,Location,Company,Logo,ratepoint,savepoint,seenpoint from job where JobId = $id"));
 				// check for empty result
 				$jobrec = array();

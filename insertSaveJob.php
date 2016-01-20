@@ -27,6 +27,7 @@ if (isset($_POST['UserId']) &&isset($_POST['JobId'])) {
     // check if row inserted or not
     if ($result) {
         // successfully inserted into database
+	
         $response["success"] = 1;
 
         // echoing JSON response

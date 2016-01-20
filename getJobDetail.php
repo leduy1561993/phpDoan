@@ -28,6 +28,12 @@ ON job.JobId = rate.JobId ") or die(mysql_error());
 if (mysql_num_rows($result) > 0) { 
     $row = mysql_fetch_array($result);
 	$response["JobId"] = $row["JobId"];
+	/////////////////////
+	$check_seen = mysql_query("select seenpoint from job where JobId= '$JobId'");
+	$temp_row = mysql_fetch_array($check_seen);
+	$seen_point=$temp_row["seenpoint"] +1;
+	$update_seen_point = mysql_query("Update job set seenpoint ='$seen_point' WHERE JobId ='$JobId' ") or die(mysql_error());
+	/////////////////////
 	$response["JobName"] = $row["JobName"];
 	$response["Location"] = $row["Location"];
 	$response["Salary"] = $row["Salary"];

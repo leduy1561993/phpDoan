@@ -14,6 +14,12 @@ $result = mysql_query("Update rate_save_seen set Rate ='$Rate' WHERE UserId='$Us
 
  if ($result) {
         // successfully updated
+		/////////////////////
+		$check_rate = mysql_query("select ratepoint from job where JobId= '$JobId'");
+		$temp_row = mysql_fetch_array($check_rate);
+		$rate_point=$temp_row["ratepoint"] +$Rate;
+		$update_rate_point = mysql_query("Update job set ratepoint ='$rate_point' WHERE JobId ='$JobId' ") or die(mysql_error());
+		/////////////////////
         $response["success"] = 1;
         $response["message"] = "Rate successfully updated.";
         

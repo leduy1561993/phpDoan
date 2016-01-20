@@ -46,17 +46,17 @@ if (isset($_POST["keyWord"])||isset($_POST["location"])||isset($_POST["special"]
 		$keyWord = $_POST['keyWord'];
 		$location = $_POST['location'];
 		$special = $_POST['special'];
-		$result = $s->Query("@JobName $keyWord @location $location @(Requirement,Tags) $special");
+		$result = $s->Query("@(JobName,Company) $keyWord @location $location @(Requirement,Tags) $special");
 		
 	}else if(isset($_POST["keyWord"])&&isset($_POST["location"])){
 		$keyWord = $_POST['keyWord'];
 		$location = $_POST['location'];
-		 $result = $s->Query("@JobName $keyWord  @location $location");
+		 $result = $s->Query("@(JobName,Company) $keyWord  @location $location");
 		 
     }else if(isset($_POST["keyWord"])&&isset($_POST["special"])){
 		$keyWord = $_POST['keyWord'];
 		$special = $_POST['special'];
-	    $result = $s->Query("@JobName $keyWord  @(Requirement,Tags) $special");
+	    $result = $s->Query("@(JobName,Company) $keyWord  @(Requirement,Tags) $special");
 		
 	}else if(isset($_POST["location"])&&isset($_POST["special"])){
 		$location = $_POST['location'];
@@ -65,7 +65,7 @@ if (isset($_POST["keyWord"])||isset($_POST["location"])||isset($_POST["special"]
 		
 	}else if(isset($_POST["keyWord"])){
 		$keyWord = $_POST['keyWord'];
-		 $result = $s->Query("@JobName $keyWord");
+		 $result = $s->Query("@(JobName,Company) $keyWord");
 		 
 	}else if(isset($_POST["location"])){
 		$location = $_POST['location'];

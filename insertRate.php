@@ -9,11 +9,11 @@
 $response = array();
 
 // check for required fields
-if (isset($_POST['UserId']) &&isset($_POST['JobId']) && isset($_POST['Rating'])) {
+if (isset($_POST['UserId']) &&isset($_POST['JobId']) && isset($_POST['Rate'])) {
     
     $UserId = $_POST['UserId'];
     $JobId = $_POST['JobId'];
-    $Rating = $_POST['Rating'];
+    $Rating = $_POST['Rate'];
 
     // include db connect class
     require_once __DIR__ . '/connect.php';
@@ -28,6 +28,14 @@ if (isset($_POST['UserId']) &&isset($_POST['JobId']) && isset($_POST['Rating']))
     // check if row inserted or not
     if ($result) {
         // successfully inserted into database
+		
+		/////////////////////
+		$check_rate = mysql_query("select ratepoint from job where JobId= '$JobId'");
+		$temp_row = mysql_fetch_array($check_rate);
+		$rate_point=$temp_row["ratepoint"] +$Rating;
+		$update_rate_point = mysql_query("Update job set ratepoint ='$rate_point' WHERE JobId ='$JobId' ") or die(mysql_error());
+		/////////////////////
+	
         $response["success"] = 1;
 
         // echoing JSON response
